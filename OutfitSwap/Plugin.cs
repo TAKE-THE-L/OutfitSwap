@@ -9,10 +9,13 @@ namespace OutfitSwap;
 public class Plugin : BaseUnityPlugin
 {
     private float LastPress;
+    private bool WasPressing;
 
     private void Update()
     {
-        if (ControllerInputPoller.instance.rightControllerPrimaryButton)
+        var IsPressed = ControllerInputPoller.instance.rightControllerPrimaryButton;
+
+        if (IsPressed && !WasPressing)
         {
             if (Time.time - LastPress < 0.3f)
             {
@@ -21,9 +24,16 @@ public class Plugin : BaseUnityPlugin
                         ? 0
                         : SelectedOutfit + 1
                 );
+
+                LastPress = 0f;
             }
-            LastPress = Time.time;
+            else
+            {
+                LastPress = Time.time;
+            }
         }
+
+        WasPressing = IsPressed;
     }
 
     private static void Wear(int outfitIndex)
