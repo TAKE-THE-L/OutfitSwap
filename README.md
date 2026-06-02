@@ -1,5 +1,5 @@
 # OutfitSwap
-A BepInEx Gorilla Tag mod that switches to your next saved outfit when you double tap the A button on your right controller
+A BepInEx Gorilla Tag mod that switches to your next saved outfit when you ~~double tap the A button on your right controller~~ click your thumbstick on your right controller
 
 ## Forked Repo
 IDK if this is skidding but this is a fork that just changes the input for changing outfits so people dont see your thumb move.
