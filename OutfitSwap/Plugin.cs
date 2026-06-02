@@ -13,7 +13,7 @@ public class Plugin : BaseUnityPlugin
 
     private void Update()
     {
-        var IsPressed = ControllerInputPoller.instance.rightControllerPrimaryButton;
+        var IsPressed = ControllerInputPoller.instance.rightControllerSecondary2DAxisClick;
 
         if (IsPressed && !WasPressing)
         {
