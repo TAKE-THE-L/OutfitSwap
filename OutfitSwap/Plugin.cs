@@ -8,16 +8,15 @@ namespace OutfitSwap;
 [BepInPlugin(Constants.Guid, Constants.ModName, Constants.Version)]
 public class Plugin : BaseUnityPlugin
 {
-    private float LastPress;
-    private bool WasPressing;
+    private bool changed;
 
     private void Update()
     {
         var IsPressed = ControllerInputPoller.instance.rightControllerSecondary2DAxisClick;
 
-        if (IsPressed && !WasPressing)
+        if (IsPressed)
         {
-            if (Time.time - LastPress < 0.3f)
+            if (!changed)
             {
                 Wear(
                     (SelectedOutfit + 1) >= (SubscriptionManager.IsLocalSubscribed() ? 10 : 4) // just checks if you have vim and gets the outfit cap based on that 
@@ -25,15 +24,13 @@ public class Plugin : BaseUnityPlugin
                         : SelectedOutfit + 1
                 );
 
-                LastPress = 0f;
+                changed = true;
             }
-            else
-            {
-                LastPress = Time.time;
-            }
+        else
+        {
+            changed = false;
         }
-
-        WasPressing = IsPressed;
+        
     }
 
     private static void Wear(int outfitIndex)
